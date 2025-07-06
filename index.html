@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SurvivalCraft2025</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    /* Join Popup Styles */
+    .join-popup {
+        display: none;
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        background: #23272a;
+        color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        padding: 24px 32px 20px 32px;
+        z-index: 1000;
+        min-width: 320px;
+        text-align: center;
+        font-size: 1.1em;
+        animation: fadeIn 0.2s;
+    }
+    .join-popup.show {
+        display: block;
+    }
+    .join-popup .popup-title {
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 1.2em;
+        margin-top: 10px;
+    }
+    .join-popup .popup-ip {
+        background: #111;
+        padding: 8px 16px;
+        border-radius: 5px;
+        font-family: monospace;
+        font-size: 1.1em;
+        margin-bottom: 14px;
+        display: inline-block;
+        letter-spacing: 0.5px;
+    }
+    .join-popup .copy-btn {
+        background: #238636;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 7px 18px;
+        font-size: 1em;
+        cursor: pointer;
+        margin-top: 8px;
+        transition: background 0.2s;
+    }
+    .join-popup .copy-btn:hover {
+        background: #2ea043;
+    }
+    .join-popup .copied {
+        color: #00ff99;
+        margin-left: 10px;
+        font-size: 0.98em;
+    }
+    .popup-close {
+        position: absolute;
+        top: 10px;
+        right: 14px;
+        background: transparent;
+        border: none;
+        color: #aaa;
+        font-size: 1.3em;
+        cursor: pointer;
+        font-weight: bold;
+        z-index: 10;
+        transition: color 0.2s;
+    }
+    .popup-close:hover {
+        color: #fff;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px);}
+        to { opacity: 1; transform: translateY(0);}
+    }
+
+    /* Link Popup Styles */
+    .link-popup {
+        display: none;
+        position: fixed;
+        left: 50%;
+        bottom: 40px;
+        transform: translateX(-50%);
+        background: #23272a;
+        color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        padding: 20px 32px 24px 32px;
+        z-index: 2000;
+        font-size: 1.08em;
+        animation: fadeIn 0.2s;
+        min-width: 260px;
+        text-align: center;
+    }
+    .link-popup.show {
+        display: block;
+    }
+    .link-popup .popup-dest {
+        margin-bottom: 12px;
+        word-break: break-all;
+    }
+    .link-popup .agree-btn {
+        background: #238636;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 7px 18px;
+        font-size: 1em;
+        cursor: pointer;
+        margin-top: 8px;
+        transition: background 0.2s;
+    }
+    .link-popup .agree-btn:hover {
+        background: #2ea043;
+    }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero hero-right">
+        <div class="container">
+            <h1 style="text-align: center; ">Welcome to Our Minecraft SMP Server</h1>
+            <nav class="nav">
+            <div class="logo">SurvivalCraft2025</div>
+            <div>
+                <a href="#join" class="nav-link" id="joinBtn">Join</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="https://discord.gg/5RtBv7tHYG" class="nav-link">Contact</a>
+            </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Join Popup -->
+    <div class="join-popup" id="joinPopup">
+        <button class="popup-close" id="closeJoinPopup" aria-label="Close">&times;</button>
+        <div class="popup-title">Server IP</div>
+        <div class="popup-ip" id="popupIp">result-island.gl.joinmc.link</div>
+        <br>
+        <button class="copy-btn" id="copyBtn">Copy</button>
+        <span class="copied" id="copiedMsg" style="display:none;">Copied!</span>
+    </div>
+
+    <!-- Link Destination Popup -->
+    <div class="link-popup" id="linkPopup">
+        <button class="popup-close" id="closeLinkPopup" aria-label="Close">&times;</button>
+        <div class="popup-dest" id="popupDest"></div>
+        <button class="agree-btn" id="agreeBtn">Agree &amp; Continue</button>
+    </div>
+
+    <!-- Features Section -->
+    <main>
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2>Why Play Here?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Friendly Community</h3>
+                        <p>Our players are welcoming and helpful. Make new friends and enjoy a positive atmosphere.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Active Moderation</h3>
+                        <p>Our staff team ensures a safe and fair experience for everyone. No griefing or cheating allowed.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Events & Challenges</h3>
+                        <p>Participate in regular events, building contests, and server-wide adventures.</p>
+                    </div>
+                </div>
+                <p class="subtitle"style="text-align: center;">
+                    The best place to build, survive, and make friends.<br>
+                    <span class="ip-label">Server IP:</span> <span class="ip">result-island.gl.joinmc.link</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- Join Section -->
+        <section id="join" class="join-section">
+            <div class="container">
+                <h2>How to Join</h2>
+                <ol>
+                    <li>Open Minecraft Java Edition</li>
+                    <li>Click "Multiplayer" &gt; "Add Server"</li>
+                    <li>Enter the IP: <strong>result-island.gl.joinmc.link</strong></li>
+                    <li>Join and start your adventure!</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Contact & Community</h2>
+                <p>
+                    Need help or want to chat? Join our
+                    <a href="https://discord.gg/yourdiscord" target="_blank">Discord</a>
+                    or email us at
+                    <a href="mailto:admin@examplemc.net">admin@examplemc.net</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#features">Features</a>
+                <a href="#join">Join</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-copy">
+                &copy; 2024 SurvivalCraft2025 &middot; Not affiliated with Mojang or Microsoft
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // filepath: c:\Users\adamb\Downloads\Neuer Ordner\index.html
+    const joinBtn = document.getElementById('joinBtn');
+    const joinPopup = document.getElementById('joinPopup');
+    const copyBtn = document.getElementById('copyBtn');
+    const popupIp = document.getElementById('popupIp');
+    const copiedMsg = document.getElementById('copiedMsg');
+    const linkPopup = document.getElementById('linkPopup');
+    const popupDest = document.getElementById('popupDest');
+    const agreeBtn = document.getElementById('agreeBtn');
+    const closeJoinPopup = document.getElementById('closeJoinPopup');
+    const closeLinkPopup = document.getElementById('closeLinkPopup');
+    let popupTimeout = null;
+    let linkPopupTimeout = null;
+    let pendingHref = null;
+
+    joinBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        joinPopup.classList.add('show');
+        copiedMsg.style.display = 'none';
+        if (popupTimeout) clearTimeout(popupTimeout);
+        popupTimeout = setTimeout(() => {
+            joinPopup.classList.remove('show');
+        }, 10000);
+    });
+
+    copyBtn.addEventListener('click', function() {
+        navigator.clipboard.writeText(popupIp.textContent.trim());
+        copiedMsg.style.display = 'inline';
+        setTimeout(() => {
+            copiedMsg.style.display = 'none';
+        }, 1800);
+    });
+
+    document.addEventListener('click', function(e) {
+        const a = e.target.closest('a');
+        if (!a) return;
+
+        const href = a.getAttribute('href');
+        if (
+            !href ||
+            href.startsWith('#') ||
+            href.startsWith('mailto:') ||
+            href.startsWith('javascript:')
+        ) {
+            // Allow internal anchors and mailto/javascript links
+            return;
+        }
+
+        // Check if it's an internal anchor link (same page)
+        if (href.startsWith(window.location.pathname + '#')) {
+            return;
+        }
+
+        // Show popup with destination and require confirmation
+        e.preventDefault();
+        popupDest.textContent = `Destination: ${href}`;
+        linkPopup.classList.add('show');
+        pendingHref = href;
+    });
+
+    agreeBtn.addEventListener('click', function() {
+        if (pendingHref) {
+            linkPopup.classList.remove('show');
+            window.location.href = pendingHref;
+            pendingHref = null;
+        }
+    });
+
+    closeJoinPopup.addEventListener('click', function() {
+        joinPopup.classList.remove('show');
+        if (popupTimeout) clearTimeout(popupTimeout);
+    });
+
+    closeLinkPopup.addEventListener('click', function() {
+        linkPopup.classList.remove('show');
+        pendingHref = null;
+    });
+    </script>
+</body>
+</html>
