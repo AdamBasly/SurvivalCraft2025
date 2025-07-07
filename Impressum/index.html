@@ -27,6 +27,80 @@
         a {
             color: #00bfff;
         }
+        .join-popup {
+            display: none;
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: #23272a;
+            color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+            padding: 24px 32px 20px 32px;
+            z-index: 1000;
+            min-width: 320px;
+            text-align: center;
+            font-size: 1.1em;
+            animation: fadeIn 0.2s;
+        }
+        .join-popup.show {
+            display: block;
+        }
+        .join-popup .popup-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .join-popup .popup-ip {
+            background: #111;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 1.1em;
+            margin-bottom: 14px;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+        .join-popup .copy-btn {
+            background: #238636;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 7px 18px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+        .join-popup .copy-btn:hover {
+            background: #2ea043;
+        }
+        .join-popup .copied {
+            color: #00ff99;
+            margin-left: 10px;
+            font-size: 0.98em;
+        }
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            background: transparent;
+            border: none;
+            color: #aaa;
+            font-size: 1.3em;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 10;
+            transition: color 0.2s;
+        }
+        .popup-close:hover {
+            color: #fff;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
     </style>
 </head>
 <body>
@@ -52,18 +126,62 @@
             <a href="javascript:history.back()">Zurück</a>
         </p>
     </div>
+    <!-- Join Popup -->
+    <div class="join-popup" id="joinPopup">
+        <button class="popup-close" id="closeJoinPopup" aria-label="Close">&times;</button>
+        <div class="popup-title">Server IP</div>
+        <div class="popup-ip" id="popupIp">result-island.gl.joinmc.link</div>
+        <br>
+        <button class="copy-btn" id="copyBtn">Copy</button>
+        <span class="copied" id="copiedMsg" style="display:none;">Copied!</span>
+    </div>
     <footer class="footer">
         <div class="container">
             <div class="footer-links">
                 <a href="#features">Features</a>
                 <a href="#join">Join</a>
                 <a href="#contact">Contact</a>
-                <a href="./Impressum/">Impressum</a>
+                <a href="./">Impressum</a>
             </div>
             <div class="footer-copy">
                 &copy; 2024 SurvivalCraft2025 &middot; Not affiliated with Mojang or Microsoft
             </div>
         </div>
     </footer>
+    <script>
+    // Popup and copy for all Join links
+    const joinPopup = document.getElementById('joinPopup');
+    const closeJoinPopup = document.getElementById('closeJoinPopup');
+    const copyBtn = document.getElementById('copyBtn');
+    const popupIp = document.getElementById('popupIp');
+    const copiedMsg = document.getElementById('copiedMsg');
+    let popupTimeout = null;
+
+    // Attach to all join links in the footer (and page)
+    document.querySelectorAll('a[href="#join"], a.nav-link[href="#join"]').forEach(function(joinBtn) {
+        joinBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            joinPopup.classList.add('show');
+            copiedMsg.style.display = 'none';
+            if (popupTimeout) clearTimeout(popupTimeout);
+            popupTimeout = setTimeout(() => {
+                joinPopup.classList.remove('show');
+            }, 10000);
+        });
+    });
+
+    closeJoinPopup.addEventListener('click', function() {
+        joinPopup.classList.remove('show');
+        if (popupTimeout) clearTimeout(popupTimeout);
+    });
+
+    copyBtn.addEventListener('click', function() {
+        navigator.clipboard.writeText(popupIp.textContent.trim());
+        copiedMsg.style.display = 'inline';
+        setTimeout(() => {
+            copiedMsg.style.display = 'none';
+        }, 1800);
+    });
+    </script>
 </body>
 </html>
