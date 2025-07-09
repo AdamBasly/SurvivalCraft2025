@@ -8,44 +8,136 @@
         body {
             background: #23272a;
             color: #f1f1f1;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
+        .header {
+            background: #23272a;
+            padding: 28px 0 10px 0;
+            text-align: center;
+            border-bottom: 1px solid #222;
+        }
+        .header h1 {
+            color: #00ff99;
+            margin: 0;
+            font-size: 2.2em;
+            letter-spacing: 1px;
+        }
         .container {
-            max-width: 700px;
+            max-width: 900px;
             margin: 40px auto;
             background: #2c2f33;
-            padding: 32px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            padding: 32px 24px 24px 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.25);
         }
-        h1 {
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+            margin: 32px 0 24px 0;
+        }
+        .feature-card {
+            background: #23272a;
+            border-radius: 10px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.13);
+            padding: 28px 20px 20px 20px;
+            text-align: center;
+            transition: transform 0.15s, box-shadow 0.15s;
+            border: 1px solid #222;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 4px 18px rgba(0,255,153,0.08);
+            border-color: #00ff99;
+        }
+        .feature-icon {
+            font-size: 2.2em;
+            margin-bottom: 12px;
             color: #00ff99;
-            margin-bottom: 24px;
+            display: block;
         }
-        ul {
-            margin: 0 0 24px 0;
-            padding-left: 20px;
+        .feature-title {
+            font-size: 1.18em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #00ff99;
         }
-        a {
+        .feature-desc {
+            font-size: 1em;
+            color: #e0e0e0;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 18px;
             color: #00bfff;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 5px;
+            padding: 7px 18px;
+            background: #23272a;
+            border: 1px solid #00bfff;
+            transition: background 0.18s, color 0.18s;
+        }
+        .back-link:hover {
+            background: #00bfff;
+            color: #23272a;
+        }
+        .footer {
+            text-align: center;
+            color: #aaa;
+            font-size: 0.98em;
+            margin: 38px 0 10px 0;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="header">
         <h1>Server Features</h1>
-        <ul>
-            <li>Friendly and active community</li>
-            <li>Active moderation and anti-griefing</li>
-            <li>Regular events and building contests</li>
-            <li>Survival Multiplayer (SMP) gameplay</li>
-            <li>Custom plugins and enhancements</li>
-            <li>Discord integration</li>
-            <li>Children-friendly chat</li>
-        </ul>
-        <a href="../">Zurück zur Startseite</a>
+    </div>
+    <div class="container">
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">🤝</span>
+                <div class="feature-title">Friendly Community</div>
+                <div class="feature-desc">Our players are welcoming and helpful. Make new friends and enjoy a positive atmosphere.</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🛡️</span>
+                <div class="feature-title">Active Moderation</div>
+                <div class="feature-desc">Our staff team ensures a safe and fair experience for everyone. No griefing or cheating allowed.</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🏆</span>
+                <div class="feature-title">Events & Contests</div>
+                <div class="feature-desc">Participate in regular events, building contests, and server-wide adventures.</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🌍</span>
+                <div class="feature-title">Survival Multiplayer</div>
+                <div class="feature-desc">Classic SMP gameplay with a twist—explore, build, and survive together.</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">⚙️</span>
+                <div class="feature-title">Custom Plugins</div>
+                <div class="feature-desc">Enjoy unique features and enhancements thanks to our custom plugins.</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">💬</span>
+                <div class="feature-title">Discord Integration</div>
+                <div class="feature-desc">Stay connected with our Discord server for updates, support, and chat.</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">👪</span>
+                <div class="feature-title">Family-Friendly Chat</div>
+                <div class="feature-desc">A safe and respectful environment for players of all ages.</div>
+            </div>
+        </div>
+        <a class="back-link" href="../">&larr; Zurück zur Startseite</a>
+    </div>
+    <div class="footer">
+        &copy; 2024 SurvivalCraft2025 &middot; Not affiliated with Mojang or Microsoft
     </div>
 </body>
 </html>
